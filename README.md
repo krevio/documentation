@@ -11,7 +11,7 @@ Zielgruppe
 Diese Dokumentation richtet sich an Systemadministrator:innen, DevOps‑Teams, Support‑Mitarbeiter:innen sowie technische Ansprechpartner:innen bei Kund:innen.
 
 Schnellstart
-1. Öffnen Sie die Installationsanleitung im Ordner docs/install/ für Ihre Plattform.  
+1. Öffnen Sie die Installationsanleitung im Ordner docs für Ihre Plattform.  
 2. Folgen Sie der Grundkonfiguration.  
 
 Support / Kontakt
