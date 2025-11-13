@@ -1,6 +1,6 @@
-# Revio AG — Dokumentation
+# revio AG — Dokumentation
 
-Willkommen im Dokumentations-Repository der Revio AG. In diesem Repository stellen wir Handbücher, Anleitungen und Referenzen zur Installation, zum Betrieb und zur Administration der Revio 4 Software zur Verfügung.
+Willkommen im Dokumentations-Repository der revio AG. In diesem Repository stellen wir Handbücher, Anleitungen und Referenzen zur Installation, zum Betrieb und zur Administration der revio 4 Software zur Verfügung.
 
 Inhalt
 - Installationsanleitungen für unterstützte Plattformen
@@ -16,4 +16,4 @@ Schnellstart
 2. Folgen Sie der Grundkonfiguration.  
 
 Support / Kontakt
-Für Support kontaktieren Sie bitte das Revio AG Support‑Team (z. B. support@revio.ch).
+Für Support kontaktieren Sie bitte das revio AG Support‑Team (z. B. support@revio.ch).
