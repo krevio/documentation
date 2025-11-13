@@ -62,7 +62,7 @@ Unsere Anwendung wird als MSIX-Paket ausgeliefert. Dieses Format ist offiziell v
 Da die App nicht aus dem Microsoft Store stammt, muss Windows wissen, dass der Administrator die Installation ausdrücklich erlaubt. Der Developer Mode ist dafür der einfachste Weg:
 
 - Er erlaubt die Installation signierter, aber nicht aus dem Store stammender MSIX-Pakete
-- Ohne diesen Modus blockiert Windows die Installation standardmäßig aus Sicherheitsgründen
+- Ohne diesen Modus blockiert Windows die Installation standardmässig aus Sicherheitsgründen
 
 #### Was der Developer Mode nicht tut
 
@@ -70,7 +70,7 @@ Da die App nicht aus dem Microsoft Store stammt, muss Windows wissen, dass der A
 - Er verändert keine System- oder Netzwerksicherheitsrichtlinien
 - Er ermöglicht nur die Installation von vertrauenswürdigen MSIX-Paketen, die digital signiert sind
 
-**Das heißt:** Aktivieren des Developer Mode ist auf Servern eine rein technische Voraussetzung, keine Gefährdung der Systemintegrität.
+**Das heisst:** Aktivieren des Developer Mode ist auf Servern eine rein technische Voraussetzung, keine Gefährdung der Systemintegrität.
 
 #### Aktivierung
 
@@ -86,7 +86,7 @@ Damit unsere WinUI 3-Anwendung korrekt funktioniert, muss die Windows App Runtim
 
 #### Für Windows Server 2019
 
-Installieren Sie die **WindowsAppRuntimeInstall-x64.exe**, da hier die Paket- und Installationsinfrastruktur für MSIX nicht standardmäßig vorhanden ist.
+Installieren Sie die **WindowsAppRuntimeInstall-x64.exe**, da hier die Paket- und Installationsinfrastruktur für MSIX nicht standardmässig vorhanden ist.
 
 **Download:**
 - [Windows App SDK Downloads](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads)
@@ -106,7 +106,7 @@ Diese Symbole stammen aus der **Segoe Fluent Icons**-Schriftart, die normalerwei
 
 #### Warum diese Schriftart erforderlich ist
 
-Da Windows Server 2019 auf dem älteren Windows 10 1809-Kernel basiert, fehlt diese Schriftart dort standardmäßig. WinUI 3 verwendet sie aber für viele Bedienelemente (Buttons, Menüs, Navigation, Symbolleisten).
+Da Windows Server 2019 auf dem älteren Windows 10 1809-Kernel basiert, fehlt diese Schriftart dort standardmässig. WinUI 3 verwendet sie aber für viele Bedienelemente (Buttons, Menüs, Navigation, Symbolleisten).
 
 **Fehlt sie, erscheinen entweder leere Rechtecke (□) oder falsche Zeichen anstelle der Icons.**
 
@@ -199,7 +199,7 @@ MSIX wird benutzergebunden installiert.
 
 Unsere Anwendung kommuniziert verschlüsselt mit dem revioServer über HTTPS. Damit diese Verbindung auf dem jeweiligen System als vertrauenswürdig gilt, muss das vom Server verwendete SSL-Zertifikat im lokalen Zertifikatsspeicher des Rechners hinterlegt werden.
 
-Da es sich hierbei um ein selbstsigniertes Zertifikat handelt, erkennt Windows es standardmäßig nicht automatisch als vertrauenswürdig. Daher muss das Zertifikat einmalig manuell importiert werden.
+Da es sich hierbei um ein selbstsigniertes Zertifikat handelt, erkennt Windows es standardmässig nicht automatisch als vertrauenswürdig. Daher muss das Zertifikat einmalig manuell importiert werden.
 
 **Gründe:**
 - Selbstsignierte Zertifikate besitzen keine Signatur einer öffentlichen Zertifizierungsstelle (z. B. DigiCert, GlobalSign)
@@ -213,7 +213,7 @@ Da es sich hierbei um ein selbstsigniertes Zertifikat handelt, erkennt Windows e
 3. Im Assistenten wählen Sie:
    - **Speicherort:** Lokaler Computer
    - **Zertifikatspeicher:** Vertrauenswürdige Stammzertifizierungsstellen
-4. Schließen Sie die Installation ab und bestätigen Sie
+4. Schliessen Sie die Installation ab und bestätigen Sie
 5. Starten Sie die Anwendung oder ggf. den Server neu
 
 #### Variante 2 – Per PowerShell (für automatisierte Deployment-Skripte)
