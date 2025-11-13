@@ -255,11 +255,11 @@ Beim Start liest die Anwendung diese Datei automatisch aus, um die Serververbind
 ```json
 [
   {
-    "Title": "Keel + Partner AG",
+    "Title": "revio AG",
     "Type": 1,
-    "Url": "https://chsg-kee-s025:27011",
+    "Url": "https://revioServer:27011",
     "IsDefault": true,
-    "LastLoginUser": "dominic.kronenberg@revio.ch"
+    "LastLoginUser": "info@revio.ch"
   }
 ]
 ```
@@ -313,4 +313,4 @@ Das System aktualisiert die Anwendung automatisch auf die neue Version, ohne das
 Bei Fragen oder Problemen wenden Sie sich bitte an den technischen Support.
 
 **Version:** 1.0  
-**Letzte Aktualisierung:** November 2024
+**Letzte Aktualisierung:** November 2025
