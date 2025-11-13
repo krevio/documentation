@@ -4,7 +4,6 @@ Willkommen im Dokumentations-Repository der revio AG. In diesem Repository stell
 
 Inhalt
 - Installationsanleitungen für unterstützte Plattformen
-- Betriebs- und Administrationshandbücher (Backup, Monitoring, Wartung)
 - Troubleshooting und häufige Fehlerlösungen
 - Release Notes und Versionshinweise
 
