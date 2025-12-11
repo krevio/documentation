@@ -1,20 +1,20 @@
-# Revio Migration Tool - Datenextraktion
+# revio Migration Tool - Datenextraktion
 
-Das **Revio Migration Tool** (`revio.migrator.exe`) extrahiert Revisionsdaten aus einer Legacy-Revio MongoDB-Datenbank und erstellt eine ZIP-Exportdatei zur Migration nach Revio 4.
+Das **revio Migration Tool** (`revio.migrator.exe`) extrahiert Revisionsdaten aus einer Legacy-revio MongoDB-Datenbank und erstellt eine ZIP-Exportdatei zur Migration nach revio 4.
 
 ## Migrationsablauf
 
-Die Migration von Revio Legacy nach Revio 4 erfolgt in zwei Schritten:
+Die Migration von revio Legacy nach revio 4 erfolgt in zwei Schritten:
 
 1. **Datenextraktion (dieses Tool):** Das Migration Tool extrahiert alle relevanten Daten (Mandanten, Dossiers, Jahresrechnungen, Strukturen, Anhänge) für das gewählte Umstellungsjahr aus der Legacy-Datenbank und erstellt eine ZIP-Exportdatei.
 
-2. **Import in Revio 4:** Die erstellte ZIP-Datei wird anschliessend in Revio 4 eingelesen. Siehe dazu die separate Dokumentation zum Datenimport.
+2. **Import in revio 4:** Die erstellte ZIP-Datei wird anschliessend in revio 4 eingelesen. Siehe dazu die separate Dokumentation zum Datenimport.
 
-> **Wichtig:** Es kann nur **ein Jahr** nach Revio 4 migriert werden. Wählen Sie das Jahr, ab dem Sie mit Revio 4 arbeiten möchten (z.B. 2025 oder 2026).
+> **Wichtig:** Es kann nur **ein Jahr** nach revio 4 migriert werden. Wählen Sie das Jahr, ab dem Sie mit revio 4 arbeiten möchten (z.B. 2025 oder 2026).
 
 ## Voraussetzungen
 
-- Das Tool muss auf dem **gleichen Server** ausgeführt werden, auf dem die MongoDB-Datenbank und der Revio-Service laufen
+- Das Tool muss auf dem **gleichen Server** ausgeführt werden, auf dem die MongoDB-Datenbank und der revio-Service laufen
 - Der Dienst `revioOnlineDb` muss laufen (MongoDB, Port 27024)
 - Der Dienst `revioOnlineServer` muss laufen (REST-API, Port 27029)
 - Ausreichend Festplattenspeicher für temporäre Dateien und die Export-ZIP-Datei
@@ -26,7 +26,7 @@ Die Migration von Revio Legacy nach Revio 4 erfolgt in zwei Schritten:
 | `--db` | MongoDB Connection String | `mongodb://localhost:27024` |
 | `--year` | Revisionsjahr für die Extraktion | `2025` |
 | `--parallelism` | Maximale Anzahl paralleler Tasks | Anzahl CPU-Kerne |
-| `--apiurl` | URL des Revio REST-API Services | `http://localhost:27029` |
+| `--apiurl` | URL des revio REST-API Services | `http://localhost:27029` |
 | `--output` | Ausgabeverzeichnis für die ZIP-Datei | `.` (aktuelles Verzeichnis) |
 | `--temp` | Verzeichnis für temporäre Dateien | System-Temp-Verzeichnis |
 | `--tlsMin` | Minimale TLS-Version (10/11/12) | `12` |
@@ -45,7 +45,7 @@ revio.migrator.exe --year 2025
 revio.migrator.exe --db "<CONNECTION_STRING>" --year 2025
 ```
 
-> **Hinweis:** Den Connection String finden Sie in der Datei `revio.Server.exe.Config` im Revio-Server-Verzeichnis (standardmässig `C:\Program Files (x86)\revio\server`).
+> **Hinweis:** Den Connection String finden Sie in der Datei `revio.Server.exe.Config` im revio-Server-Verzeichnis (standardmässig `C:\Program Files (x86)\revio\server`).
 
 ### Beispiel mit allen Parametern
 
@@ -63,11 +63,11 @@ revio.migrator.exe ^
 
 ### --db (Datenbank-Verbindung)
 
-Der MongoDB Connection String für die Verbindung zur Legacy-Revio-Datenbank.
+Der MongoDB Connection String für die Verbindung zur Legacy-revio-Datenbank.
 
 #### Connection String finden
 
-Den korrekten Connection String finden Sie in der Revio-Server-Konfiguration:
+Den korrekten Connection String finden Sie in der revio-Server-Konfiguration:
 
 **Datei:** `revio.Server.exe.Config`
 **Verzeichnis:** `C:\Program Files (x86)\revio\server` (Standardpfad)
@@ -101,7 +101,7 @@ revio.migrator.exe --db "mongodb://localhost:27024" --year 2025
 
 ### --year (Revisionsjahr)
 
-Das Jahr, ab dem Sie mit Revio 4 arbeiten möchten.
+Das Jahr, ab dem Sie mit revio 4 arbeiten möchten.
 
 **Beispiele:**
 ```cmd
@@ -132,7 +132,7 @@ revio.migrator.exe --year 2025 --parallelism 8
 
 ### --apiurl (REST-API URL)
 
-URL des Revio-Service für zusätzliche Datenabfragen (Anhang-Details, etc.).
+URL des revio-Service für zusätzliche Datenabfragen (Anhang-Details, etc.).
 
 **Standard:**
 ```
@@ -155,7 +155,7 @@ Verzeichnis, in dem die finale ZIP-Exportdatei erstellt wird.
 revio.migrator.exe --year 2025
 
 # Export in ein bestimmtes Verzeichnis
-revio.migrator.exe --year 2025 --output "C:\Revio\Exports"
+revio.migrator.exe --year 2025 --output "C:\revio\Exports"
 
 # Export auf ein Netzlaufwerk
 revio.migrator.exe --year 2025 --output "\\fileserver\exports"
@@ -260,7 +260,7 @@ Error: Connection refused to http://localhost:27029
 
 **Lösungen:**
 1. Prüfen Sie, ob der API-Dienst läuft: `sc query revioOnlineServer`
-2. Kontrollieren Sie den Port in der Revio-Konfiguration
+2. Kontrollieren Sie den Port in der revio-Konfiguration
 
 ### Speicherplatz-Fehler
 
