@@ -215,15 +215,12 @@ revio.migrator.exe ^
   --parallelism 2
 ```
 
-### Szenario 4: Mehrere Jahre migrieren
+### Hinweis zur Jahresauswahl
 
-Führen Sie das Tool mehrfach aus - einmal pro Jahr:
+Es kann nur **ein Jahr** nach Revio 4 migriert werden. Wählen Sie das Jahr, ab dem Sie mit Revio 4 arbeiten möchten:
 
-```cmd
-revio.migrator.exe --db "<CONNECTION_STRING>" --year 2022
-revio.migrator.exe --db "<CONNECTION_STRING>" --year 2023
-revio.migrator.exe --db "<CONNECTION_STRING>" --year 2024
-```
+- **2025** - Für Umstellungen ab Anfang 2025 (empfohlen)
+- **2026** - Für spätere Umstellungen
 
 ## Ausgabe
 
