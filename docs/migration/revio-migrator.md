@@ -51,10 +51,10 @@ Alle **archivierten PDF-Akten** werden ins revio 4 Archiv übertragen.
 | Bereich | Grund | Aktion erforderlich |
 |---------|-------|---------------------|
 | **Mitarbeiter** | Login in revio 4 ist neu E-Mail-basiert statt Visum-basiert | Mitarbeiter manuell in revio 4 anlegen. **Wichtig:** Dasselbe Visum wie in revio 3 verwenden! |
-| **Bilanz-/ER-/Geldflussstruktur** | Neue Strukturlogik in revio 4 | Strukturen in revio 4 neu erstellen, stille Reserven zuordnen |
-| **Checklisten** | Komplett überarbeitet in revio 4 | Neue Dynamic-Forms in revio 4 verwenden |
-| **Prüfungsplanung** | Komplett überarbeitet in revio 4 | Neue Prüfungsplanung im revio 4 verwenden |
-| **Funktionsprüfungen** | Komplett überarbeitet in revio 4 | Neues Kontrollsystem im revio 4 verwenden |
+| **Bilanz-/ER-/Geldflussstruktur** | Neue auf Kontenklassen basierte Strukturlogik in revio 4 | Vordefinierte Standard-Strukturen vom revio 4 verwenden. Punktuell anpassen |
+| **Checklisten** | Umstellung auf Formulareingabe statt Excel-Style | Neue Formulare in revio 4 verwenden |
+| **Prüfungsplanung** | Komplett überarbeitet in revio 4 | Neue Prüfungsplanung in revio 4 verwenden |
+| **Funktionsprüfungen** | Komplett überarbeitet in revio 4 | Neues Kontrollsystem in revio 4 verwenden |
 | **Spezialprüfungen (SA-CH 2022)** | Komplett überarbeitet in revio 4 | Besondere Prüfgebiete in revio 4 verwenden |
 
 ## Voraussetzungen
