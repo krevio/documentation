@@ -73,7 +73,7 @@ Alle **archivierten PDF-Akten** werden ins revio 4 Archiv übertragen.
 
 ### Schritt 2: Migrationsdatei auswählen
 
-1. Im Migrationsdialog ![Migrationsdialog](images/migration-dialog.png) klicken Sie auf **Importdatei auswählen** ![Importdatei auswählen](images/select-migration-file.png)
+1. Im Migrationsdialog ![Migrationsdialog](images/migration-dialog.png) klicken Sie auf **Importdatei auswählen** 
 2. Wählen Sie die vom revio Migration Tool erstellte ZIP-Datei aus
 3. Nach dem Laden werden Informationen über den Inhalt der Datei angezeigt
 
