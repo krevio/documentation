@@ -1,6 +1,16 @@
-# Revio Migration Tool - Benutzerhandbuch
+# Revio Migration Tool - Datenextraktion
 
 Das **Revio Migration Tool** (`revio.migrator.exe`) extrahiert Revisionsdaten aus einer Legacy-Revio MongoDB-Datenbank und erstellt eine ZIP-Exportdatei zur Migration nach Revio 4.
+
+## Migrationsablauf
+
+Die Migration von Revio Legacy nach Revio 4 erfolgt in zwei Schritten:
+
+1. **Datenextraktion (dieses Tool):** Das Migration Tool extrahiert alle relevanten Daten (Mandanten, Dossiers, Jahresrechnungen, Strukturen, Anhänge) für das gewählte Umstellungsjahr aus der Legacy-Datenbank und erstellt eine ZIP-Exportdatei.
+
+2. **Import in Revio 4:** Die erstellte ZIP-Datei wird anschliessend in Revio 4 eingelesen. Siehe dazu die separate Dokumentation zum Datenimport.
+
+> **Wichtig:** Es kann nur **ein Jahr** nach Revio 4 migriert werden. Wählen Sie das Jahr, ab dem Sie mit Revio 4 arbeiten möchten (z.B. 2025 oder 2026).
 
 ## Voraussetzungen
 
@@ -26,13 +36,13 @@ Das **Revio Migration Tool** (`revio.migrator.exe`) extrahiert Revisionsdaten au
 ### Grundlegende Verwendung
 
 ```cmd
-revio.migrator.exe --year 2024
+revio.migrator.exe --year 2025
 ```
 
 ### Beispiel mit Connection String aus Konfiguration
 
 ```cmd
-revio.migrator.exe --db "<CONNECTION_STRING>" --year 2024
+revio.migrator.exe --db "<CONNECTION_STRING>" --year 2025
 ```
 
 > **Hinweis:** Den Connection String finden Sie in der Datei `revio.Server.exe.Config` im Revio-Server-Verzeichnis (standardmässig `C:\Program Files (x86)\revio\server`).
@@ -42,7 +52,7 @@ revio.migrator.exe --db "<CONNECTION_STRING>" --year 2024
 ```cmd
 revio.migrator.exe ^
   --db "<CONNECTION_STRING>" ^
-  --year 2024 ^
+  --year 2025 ^
   --parallelism 4 ^
   --apiurl "http://localhost:27029" ^
   --output "C:\Export" ^
@@ -83,23 +93,23 @@ mongodb://localhost:27024
 **Beispiele:**
 ```cmd
 # Mit Connection String aus der Konfigurationsdatei
-revio.migrator.exe --db "<CONNECTION_STRING_AUS_CONFIG>" --year 2024
+revio.migrator.exe --db "<CONNECTION_STRING_AUS_CONFIG>" --year 2025
 
 # Ohne Authentifizierung (falls keine Auth konfiguriert)
-revio.migrator.exe --db "mongodb://localhost:27024" --year 2024
+revio.migrator.exe --db "mongodb://localhost:27024" --year 2025
 ```
 
 ### --year (Revisionsjahr)
 
-Das Jahr, für das die Revisionsdaten extrahiert werden sollen.
+Das Jahr, ab dem Sie mit Revio 4 arbeiten möchten.
 
 **Beispiele:**
 ```cmd
-# Daten für 2024 extrahieren
-revio.migrator.exe --year 2024
+# Umstellung ab 2025
+revio.migrator.exe --year 2025
 
-# Daten für 2023 extrahieren
-revio.migrator.exe --year 2023
+# Umstellung ab 2026
+revio.migrator.exe --year 2026
 ```
 
 ### --parallelism (Parallelität)
@@ -114,10 +124,10 @@ Steuert die maximale Anzahl gleichzeitig verarbeiteter Mandanten. Ein höherer W
 **Beispiele:**
 ```cmd
 # Langsamer, aber speicherschonend
-revio.migrator.exe --year 2024 --parallelism 2
+revio.migrator.exe --year 2025 --parallelism 2
 
 # Schneller bei ausreichend Ressourcen
-revio.migrator.exe --year 2024 --parallelism 8
+revio.migrator.exe --year 2025 --parallelism 8
 ```
 
 ### --apiurl (REST-API URL)
@@ -132,7 +142,7 @@ http://localhost:27029
 **Beispiel:**
 ```cmd
 # Anderer Port
-revio.migrator.exe --year 2024 --apiurl "http://localhost:8080"
+revio.migrator.exe --year 2025 --apiurl "http://localhost:8080"
 ```
 
 ### --output (Ausgabeverzeichnis)
@@ -142,13 +152,13 @@ Verzeichnis, in dem die finale ZIP-Exportdatei erstellt wird.
 **Beispiele:**
 ```cmd
 # Export ins aktuelle Verzeichnis
-revio.migrator.exe --year 2024
+revio.migrator.exe --year 2025
 
 # Export in ein bestimmtes Verzeichnis
-revio.migrator.exe --year 2024 --output "C:\Revio\Exports"
+revio.migrator.exe --year 2025 --output "C:\Revio\Exports"
 
 # Export auf ein Netzlaufwerk
-revio.migrator.exe --year 2024 --output "\\fileserver\exports"
+revio.migrator.exe --year 2025 --output "\\fileserver\exports"
 ```
 
 ### --temp (Temporäres Verzeichnis)
@@ -160,10 +170,10 @@ Verzeichnis für temporäre Dateien während der Extraktion.
 **Beispiele:**
 ```cmd
 # Alternatives Temp-Verzeichnis bei wenig Speicherplatz auf C:
-revio.migrator.exe --year 2024 --temp "D:\Temp"
+revio.migrator.exe --year 2025 --temp "D:\Temp"
 
 # Temp auf schneller SSD
-revio.migrator.exe --year 2024 --temp "E:\FastTemp"
+revio.migrator.exe --year 2025 --temp "E:\FastTemp"
 ```
 
 ### --tlsMin (TLS-Version)
@@ -179,7 +189,7 @@ Minimale TLS-Version für verschlüsselte Verbindungen. Nur relevant bei SSL-Ver
 **Beispiel:**
 ```cmd
 # Ältere TLS-Versionen erlauben (nur bei Kompatibilitätsproblemen)
-revio.migrator.exe --year 2024 --tlsMin 10
+revio.migrator.exe --year 2025 --tlsMin 10
 ```
 
 ## Typische Szenarien
@@ -189,7 +199,7 @@ revio.migrator.exe --year 2024 --tlsMin 10
 ```cmd
 revio.migrator.exe ^
   --db "<CONNECTION_STRING>" ^
-  --year 2024
+  --year 2025
 ```
 
 ### Szenario 2: Wenig Speicherplatz auf C:
@@ -199,7 +209,7 @@ Wenn das System-Temp-Verzeichnis (normalerweise auf C:) wenig freien Speicherpla
 ```cmd
 revio.migrator.exe ^
   --db "<CONNECTION_STRING>" ^
-  --year 2024 ^
+  --year 2025 ^
   --temp "D:\MigrationTemp" ^
   --output "D:\MigrationExport"
 ```
@@ -211,16 +221,9 @@ Bei einem Server mit wenig RAM oder CPU-Leistung:
 ```cmd
 revio.migrator.exe ^
   --db "<CONNECTION_STRING>" ^
-  --year 2024 ^
+  --year 2025 ^
   --parallelism 2
 ```
-
-### Hinweis zur Jahresauswahl
-
-Es kann nur **ein Jahr** nach Revio 4 migriert werden. Wählen Sie das Jahr, ab dem Sie mit Revio 4 arbeiten möchten:
-
-- **2025** - Für Umstellungen ab Anfang 2025 (empfohlen)
-- **2026** - Für spätere Umstellungen
 
 ## Ausgabe
 
@@ -230,7 +233,7 @@ Das Tool erstellt eine ZIP-Datei im Format:
 revio_export_YYYY_YYYYMMDD_HHMMSS.zip
 ```
 
-**Beispiel:** `revio_export_2024_20241211_143022.zip`
+**Beispiel:** `revio_export_2025_20251211_143022.zip`
 
 Die ZIP-Datei enthält:
 - JSON-Dateien mit Mandanten-, Dossier- und Finanzdaten
@@ -268,7 +271,7 @@ Error: Not enough disk space
 **Lösung:** Verwenden Sie ein anderes Temp-Verzeichnis auf einem Laufwerk mit ausreichend Speicherplatz:
 
 ```cmd
-revio.migrator.exe --year 2024 --temp "D:\Temp" --output "D:\Export"
+revio.migrator.exe --year 2025 --temp "D:\Temp" --output "D:\Export"
 ```
 
 ### Abbruch mit Ctrl+C
