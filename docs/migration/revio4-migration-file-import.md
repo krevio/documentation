@@ -70,3 +70,39 @@ Alle **archivierten PDF-Akten** werden ins revio 4 Archiv übertragen.
 1. Melden Sie sich in revio 4 an
 2. Klicken Sie unten links auf **Einstellungen** ![Einstellungen](images/settings-icon.png)
 3. Wählen Sie **Migration starten** ![Migration starten](images/start-migration.png)
+
+### Schritt 2: Migrationsdatei auswählen
+
+1. Im Migrationsdialog ![Migrationsdialog](images/migration-dialog.png) klicken Sie auf **Importdatei auswählen** ![Importdatei auswählen](images/select-migration-file.png)
+2. Wählen Sie die vom revio Migration Tool erstellte ZIP-Datei aus
+3. Nach dem Laden werden Informationen über den Inhalt der Datei angezeigt
+
+### Schritt 3: Aktentypen zuweisen
+
+Es werden alle importierbaren revio 3 Aktentypen angezeigt. Weisen Sie jedem Aktentyp den entsprechenden revio 4 Containertyp zu.
+
+> **Hinweis:** Es werden nur lizenzierte revio 4 Container zur Auswahl angezeigt.
+
+### Schritt 4: Jahresrechnung festlegen
+
+Falls für einen Mandanten mehrere Akten mit unterschiedlichen Jahresrechnungen vorhanden sind, müssen Sie festlegen, welche revio 3 Jahresrechnung in revio 4 übernommen werden soll.
+
+### Schritt 5: Archivimport konfigurieren
+
+Der Archivimport kann aktiviert oder deaktiviert werden.
+
+> **Tipp:** Archivimporte dauern am längsten. Für schnelle Tests kann der Archivimport deaktiviert werden.
+
+### Schritt 6: Import starten
+
+Starten Sie den Import. Der Fortschritt wird angezeigt.
+
+## Wiederholter Import
+
+Die Migrationsdatei kann beliebig oft importiert werden. Dabei gilt:
+
+- Es wird jeweils die **AktenId aus revio 3** verwendet
+- Falls eine Akte von einer vorherigen Migration bereits existiert, wird diese **überschrieben**
+- **Ausnahme:** Sobald der Status einer Akte nicht mehr auf "migriert" steht, wird diese Akte nicht mehr überschrieben
+
+> **Hinweis:** Diese Logik ermöglicht es, die Migration mehrfach zu testen, ohne bereits bearbeitete Akten zu verlieren.
