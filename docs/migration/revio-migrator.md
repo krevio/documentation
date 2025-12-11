@@ -6,11 +6,56 @@ Das **revio Migration Tool** (`revio.migrator.exe`) extrahiert Revisionsdaten au
 
 Die Migration von revio Legacy nach revio 4 erfolgt in zwei Schritten:
 
-1. **Datenextraktion (dieses Tool):** Das Migration Tool extrahiert alle relevanten Daten (Mandanten, Dossiers, Jahresrechnungen, Strukturen, Anhänge) für das gewählte Umstellungsjahr aus der Legacy-Datenbank und erstellt eine ZIP-Exportdatei.
+1. **Datenextraktion (dieses Tool):** Das Migration Tool extrahiert alle relevanten Daten für das gewählte Umstellungsjahr aus der Legacy-Datenbank und erstellt eine ZIP-Exportdatei.
 
 2. **Import in revio 4:** Die erstellte ZIP-Datei wird anschliessend in revio 4 eingelesen. Siehe dazu die separate Dokumentation zum Datenimport.
 
 > **Wichtig:** Es kann nur **ein Jahr** nach revio 4 migriert werden. Wählen Sie das Jahr, ab dem Sie mit revio 4 arbeiten möchten (z.B. 2025 oder 2026).
+
+### Was wird migriert?
+
+Da revio 4 viele Bereiche neu und besser umsetzt, können nicht alle Daten 1:1 übernommen werden.
+
+#### Mandanten und Akten
+
+- **Alle Mandanten** werden vollständig übernommen
+- **Alle Akten** für das gewählte Extraktionsjahr werden übernommen
+
+#### Jahresrechnung
+
+- **Konten** werden übernommen
+- **Spiegelgruppen** und **Umbuchungen** werden erstellt
+- **Stille Reserven** werden übernommen (müssen im revio 4 den Bilanz- und Erfolgsgruppen zugeordnet werden)
+- **Bilanz-, ER- und Geldflussstruktur** werden *nicht* übernommen
+
+> **Hinweis zur Jahresrechnung:** Im revio 4 gibt es nur noch eine Jahresrechnung pro Mandant (nicht mehr pro Akte). Falls im revio 3 mehrere Aktentypen mit unterschiedlichen Jahresrechnungen pro Mandant existieren, muss beim Import festgelegt werden, welcher Aktentyp als Jahresrechnungsbasis dient.
+
+#### Prüfungsdokumentation
+
+Folgende Bereiche werden mit allen zugehörigen Anhängen übernommen:
+
+- **Allgemeine Prüfungshandlungen**
+- **Notizen**
+- **Dauerakten**
+
+#### Sonstige Anhänge
+
+Alle anderen Anhänge, die nicht in die oben genannten Bereiche fallen (z.B. Checklisten, Spezial-Prüfgebiete), werden in der Akte im Bereich **Belege** zur Wiederverwendung bereitgestellt.
+
+#### Archiv
+
+Alle **archivierten PDF-Akten** werden ins revio 4 Archiv übertragen.
+
+### Was wird NICHT migriert?
+
+| Bereich | Grund | Aktion erforderlich |
+|---------|-------|---------------------|
+| **Mitarbeiter** | Login in revio 4 ist neu E-Mail-basiert statt Visum-basiert | Mitarbeiter manuell in revio 4 anlegen. **Wichtig:** Dasselbe Visum wie in revio 3 verwenden! |
+| **Bilanz-/ER-/Geldflussstruktur** | Neue Strukturlogik in revio 4 | Strukturen in revio 4 neu erstellen, stille Reserven zuordnen |
+| **Checklisten** | Komplett überarbeitet in revio 4 | Neue Dynamic-Forms in revio 4 verwenden |
+| **Prüfungsplanung** | Komplett überarbeitet in revio 4 | Neue Prüfungsplanung im revio 4 verwenden |
+| **Funktionsprüfungen** | Komplett überarbeitet in revio 4 | Neues Kontrollsystem im revio 4 verwenden |
+| **Spezialprüfungen (SA-CH 2022)** | Komplett überarbeitet in revio 4 | Besondere Prüfgebiete in revio 4 verwenden |
 
 ## Voraussetzungen
 
