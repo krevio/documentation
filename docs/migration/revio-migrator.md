@@ -8,7 +8,7 @@ Die Migration von revio Legacy nach revio 4 erfolgt in zwei Schritten:
 
 1. **Datenextraktion (dieses Tool):** Das Migration Tool extrahiert alle relevanten Daten für das gewählte Umstellungsjahr aus der Legacy-Datenbank und erstellt eine ZIP-Exportdatei.
 
-2. **Import in revio 4:** Die erstellte ZIP-Datei wird anschliessend in revio 4 eingelesen. Siehe dazu die [Dokumentation zum Migrationsimport](revio4-migration-file-import.md).
+2. **Import in revio 4:** Die erstellte ZIP-Datei wird anschliessend in revio 4 eingelesen. Siehe dazu die separate Dokumentation zum Datenimport.
 
 > **Wichtig:** Es kann nur **ein Jahr** nach revio 4 migriert werden. Wählen Sie das Jahr, ab dem Sie mit revio 4 arbeiten möchten (z.B. 2025 oder 2026).
 
@@ -184,10 +184,33 @@ URL des revio-Service für zusätzliche Datenabfragen (Anhang-Details, etc.).
 http://localhost:27029
 ```
 
-**Beispiel:**
+> **Wichtig:** Der Standardwert `http://localhost:27029` funktioniert in den meisten Installationen **nicht**, da der revio-Server typischerweise auf die öffentliche IP-Adresse des Servers hört, nicht auf localhost.
+
+#### API-URL finden
+
+Die korrekte API-URL finden Sie in der revio-Server-Konfiguration:
+
+**Datei:** `revio.Server.exe.Config`
+**Verzeichnis:** `C:\Program Files (x86)\revio\server` (Standardpfad)
+
+Öffnen Sie die Datei und suchen Sie nach dem Eintrag `revioServer` im Abschnitt `<connectionStrings>`:
+
+```xml
+<connectionStrings>
+  <add name="revioDBConnection" connectionString="mongodb://...@localhost:27024/revioDB"/>
+  <add name="revioServer" connectionString="http://192.168.0.205:27029"/>
+</connectionStrings>
+```
+
+Verwenden Sie den Wert aus dem `revioServer`-Eintrag als `--apiurl` Parameter.
+
+**Beispiele:**
 ```cmd
+# Mit IP-Adresse aus der Konfiguration
+revio.migrator.exe --year 2025 --apiurl "http://192.168.0.205:27029"
+
 # Anderer Port
-revio.migrator.exe --year 2025 --apiurl "http://localhost:8080"
+revio.migrator.exe --year 2025 --apiurl "http://192.168.0.205:8080"
 ```
 
 ### --output (Ausgabeverzeichnis)
