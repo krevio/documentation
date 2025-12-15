@@ -61,6 +61,7 @@ Alle **archivierten PDF-Akten** werden ins revio 4 Archiv übertragen.
 
 - Eine gültige ZIP-Exportdatei vom revio Migration Tool
 - Alle Mitarbeiter müssen in revio 4 angelegt sein (mit identischen Visa)
+- Alle Organisationen müssen in revio 4 angelegt sein
 - Ausreichende Berechtigungen für den Datenimport (Administrator)
 
 ## Import durchführen
@@ -73,29 +74,35 @@ Alle **archivierten PDF-Akten** werden ins revio 4 Archiv übertragen.
 
 ### Schritt 2: Migrationsdatei auswählen
 
-1. Im Migrationsdialog ![Migrationsdialog](images/migration-dialog.png) 
+1. Im Migrationsdialog ![Migrationsdialog](images/migration-dialog.png)
 
-   klicken Sie auf **Importdatei auswählen** 
+   klicken Sie auf **Importdatei auswählen**
 2. Wählen Sie die vom revio Migration Tool erstellte ZIP-Datei aus
 3. Nach dem Laden werden Informationen über den Inhalt der Datei angezeigt
 
-### Schritt 3: Aktentypen zuweisen
+### Schritt 3: Organisationen zuweisen
+
+Es werden alle in der Migrationsdatei enthaltenen Organisationen angezeigt. Weisen Sie jeder Organisation die entsprechende revio 4 Organisation zu.
+
+> **Wichtig:** Organisationen werden nicht automatisch erstellt und müssen vorgängig in revio 4 angelegt werden. Es werden nur Daten von zugeordneten Organisationen importiert.
+
+### Schritt 4: Aktentypen zuweisen
 
 Es werden alle importierbaren revio 3 Aktentypen angezeigt. Weisen Sie jedem Aktentyp den entsprechenden revio 4 Containertyp zu.
 
 > **Hinweis:** Es werden nur lizenzierte revio 4 Container zur Auswahl angezeigt.
 
-### Schritt 4: Jahresrechnung festlegen
+### Schritt 5: Jahresrechnung festlegen
 
 Falls für einen Mandanten mehrere Akten mit unterschiedlichen Jahresrechnungen vorhanden sind, müssen Sie festlegen, welche revio 3 Jahresrechnung in revio 4 übernommen werden soll.
 
-### Schritt 5: Archivimport konfigurieren
+### Schritt 6: Archivimport konfigurieren
 
 Der Archivimport kann aktiviert oder deaktiviert werden.
 
 > **Tipp:** Archivimporte dauern am längsten. Für schnelle Tests kann der Archivimport deaktiviert werden.
 
-### Schritt 6: Import starten
+### Schritt 7: Import starten
 
 Starten Sie den Import. Der Fortschritt wird angezeigt.
 
