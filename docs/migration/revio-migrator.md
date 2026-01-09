@@ -10,7 +10,7 @@ Die Migration von revio Legacy nach revio 4 erfolgt in zwei Schritten:
 
 1. **Datenextraktion (dieses Tool):** Das Migration Tool extrahiert alle relevanten Daten für das gewählte Umstellungsjahr aus der Legacy-Datenbank und erstellt eine ZIP-Exportdatei.
 
-2. **Import in revio 4:** Die erstellte ZIP-Datei wird anschliessend in revio 4 eingelesen. Siehe dazu die separate Dokumentation zum Datenimport.
+2. **Import in revio 4:** Die erstellte ZIP-Datei wird anschliessend in revio 4 eingelesen. Siehe dazu die [Dokumentation zum Datenimport](revio4-migration-file-import.md).
 
 > **Wichtig:** Es kann nur **ein Jahr** nach revio 4 migriert werden. Wählen Sie das Jahr, ab dem Sie mit revio 4 arbeiten möchten (z.B. 2025 oder 2026).
 
