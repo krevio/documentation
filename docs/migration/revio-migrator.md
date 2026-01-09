@@ -81,16 +81,10 @@ Alle **archivierten PDF-Akten** werden ins revio 4 Archiv übertragen.
 ### Grundlegende Verwendung
 
 ```cmd
-revio.migrator.exe --year 2025
+revio.migrator.exe --year 2025 --db "<CONNECTION_STRING>" --apiurl "<API_URL>" 
 ```
 
-### Beispiel mit Connection String aus Konfiguration
-
-```cmd
-revio.migrator.exe --db "<CONNECTION_STRING>" --year 2025
-```
-
-> **Hinweis:** Den Connection String finden Sie in der Datei `revio.Server.exe.Config` im revio-Server-Verzeichnis (standardmässig `C:\Program Files (x86)\revio\server`).
+> **Hinweis:** Den Connection String und die API-Url finden Sie in der Datei `revio.Server.exe.Config` im revio-Server-Verzeichnis (standardmässig `C:\Program Files (x86)\revio\server`).
 
 ### Beispiel mit allen Parametern
 
