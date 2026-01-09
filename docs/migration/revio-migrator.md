@@ -2,6 +2,8 @@
 
 Das **revio Migration Tool** ([`revio.migrator.exe`](https://reviofiles.blob.core.windows.net/revio4-installation-files/database/revio.migrator.exe)) extrahiert Revisionsdaten aus einer Legacy-revio MongoDB-Datenbank und erstellt eine ZIP-Exportdatei zur Migration nach revio 4.
 
+> **Wichtig:** Das Migration Tool benötigt mindestens **revio Version 3.9.0.5**. Bitte stellen Sie sicher, dass Ihre revio 3 Installation auf diese Version aktualisiert wurde, bevor Sie die Migration durchführen.
+
 ## Migrationsablauf
 
 Die Migration von revio Legacy nach revio 4 erfolgt in zwei Schritten:
