@@ -1,6 +1,6 @@
 # revio Migration Tool - Datenextraktion
 
-Das **revio Migration Tool** (`revio.migrator.exe`) extrahiert Revisionsdaten aus einer Legacy-revio MongoDB-Datenbank und erstellt eine ZIP-Exportdatei zur Migration nach revio 4.
+Das **revio Migration Tool** ([`revio.migrator.exe`](https://reviofiles.blob.core.windows.net/revio4-installation-files/database/revio.migrator.exe)) extrahiert Revisionsdaten aus einer Legacy-revio MongoDB-Datenbank und erstellt eine ZIP-Exportdatei zur Migration nach revio 4.
 
 ## Migrationsablauf
 
