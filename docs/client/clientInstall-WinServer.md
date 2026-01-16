@@ -198,7 +198,7 @@ MSIX wird benutzergebunden installiert.
 
 Unsere Anwendung kommuniziert verschlüsselt mit dem revioServer über HTTPS. Damit diese Verbindung auf dem jeweiligen System als vertrauenswürdig gilt, muss das vom Server verwendete SSL-Zertifikat im lokalen Zertifikatsspeicher des Rechners hinterlegt werden.
 
-Da es sich hierbei um ein selbstsigniertes Zertifikat handelt, erkennt Windows es standardmässig nicht automatisch als vertrauenswürdig. Daher muss das Zertifikat einmalig manuell importiert werden.
+Da es sich hierbei um ein selbstsigniertes Zertifikat handelt, erkennt Windows es standardmässig nicht automatisch als vertrauenswürdig. Daher muss das Zertifikat einmalig manuell importiert werden. Das Zertifikat und die Serverkonfiguration werden im finalen Schritt der revio4 Backendinstallation erstellt (siehe revio4 Installationshandbuch). Im generierten Zip-File (revioClientConfig.zip) kann das Zertifikat extrahiert werden.
 
 **Gründe:**
 - Selbstsignierte Zertifikate besitzen keine Signatur einer öffentlichen Zertifizierungsstelle (z. B. DigiCert, GlobalSign)
