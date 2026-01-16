@@ -149,8 +149,7 @@ Diese stellen sicher, dass die Anwendung sowohl ihre Oberfläche (WinUI 3) als a
 3. **Installation per PowerShell:**
    ```powershell
    Add-AppxPackage -Path "C:\Deploy\UnsereApp.msix"
-   ```
-   > Hinweis: Adminrechte sind nicht zwingend erforderlich
+   ```   
 
 ---
 
