@@ -7,35 +7,16 @@
 3. [Vorbereitende Schritte](#vorbereitende-schritte)
 4. [Installation](#installation)
 5. [Konfiguration](#konfiguration)
-6. [Updates](#updates)
 
 ---
 
 ## Über MSIX
 
-### Was ist eine MSIX-Datei?
+Der revio 4 Client wird als **MSIX-Paket** ausgeliefert – dem modernen, von Microsoft empfohlenen Installationsformat für Windows-Anwendungen (Nachfolger von MSI/AppX). MSIX-Pakete sind digital signierte Container, die rückstandsfrei installiert, sauber inkrementell aktualisiert und über IT-Verteilungssysteme wie Intune, SCCM oder GPO verteilt werden können.
 
-MSIX ist das moderne Installationsformat von Microsoft für Windows-Anwendungen. Es wurde entwickelt, um Software sicher, zuverlässig und sauber zu installieren und zu aktualisieren. Es ist der Nachfolger von MSI und AppX.
-
-MSIX-Pakete enthalten alle benötigten Dateien, Abhängigkeiten und Konfigurationen in einem einzigen, digital signierten Container. Dadurch wird sichergestellt, dass:
-
-- die Installation sicher ist (Windows prüft die Signatur)
-- keine Systemdateien verändert werden
-- Deinstallation rückstandsfrei erfolgt
-- Updates automatisch und inkrementell verteilt werden können
+Da unser MSIX mit einem öffentlich vertrauenswürdigen Zertifikat (DigiCert) signiert ist, sind weder Developer Mode noch zusätzliche Trust-Konfigurationen auf den Zielsystemen erforderlich.
 
 **Weitere Informationen:** [Microsoft MSIX Overview](https://learn.microsoft.com/en-us/windows/msix/overview)
-
-### Warum unsere App als MSIX verteilt wird
-
-Unsere Anwendung ist eine moderne WinUI 3 App – also eine Anwendung, die auf dem neuesten Windows-App-Framework aufbaut. Dieses Framework nutzt das Windows App SDK, das von Microsoft für MSIX-Verteilung optimiert ist.
-
-Wir verwenden MSIX, weil es:
-
-1. die Installation vereinfacht – kein manuelles Setup, alles ist in einem Paket
-2. höhere Sicherheit bietet – das Paket ist digital signiert und überprüfbar
-3. automatische Updates ermöglicht – zukünftige Versionen können direkt installiert werden, ohne vorherige manuelle Deinstallation
-4. kompatibel mit IT-Verteilungssystemen wie Intune oder Gruppenrichtlinien ist
 
 ---
 
@@ -53,34 +34,7 @@ Wir verwenden MSIX, weil es:
 
 Folgende Komponenten müssen vor der Installation einmalig eingerichtet werden:
 
-### 1. Developer Mode aktivieren
-
-#### Warum der Entwicklermodus aktiviert werden muss
-
-Unsere Anwendung wird als MSIX-Paket ausgeliefert. Dieses Format ist offiziell von Microsoft vorgesehen, erfordert aber eine Vertrauensquelle für die Installation.
-
-Da die App nicht aus dem Microsoft Store stammt, muss Windows wissen, dass der Administrator die Installation ausdrücklich erlaubt. Der Developer Mode ist dafür der einfachste Weg:
-
-- Er erlaubt die Installation signierter, aber nicht aus dem Store stammender MSIX-Pakete
-- Ohne diesen Modus blockiert Windows die Installation standardmässig aus Sicherheitsgründen
-
-#### Was der Developer Mode nicht tut
-
-- Er schaltet keinen Debug-Modus oder unsicheren Zustand frei
-- Er verändert keine System- oder Netzwerksicherheitsrichtlinien
-- Er ermöglicht nur die Installation von vertrauenswürdigen MSIX-Paketen, die digital signiert sind
-
-**Das heisst:** Aktivieren des Developer Mode ist auf Servern eine rein technische Voraussetzung, keine Gefährdung der Systemintegrität.
-
-#### Aktivierung
-
-1. Öffnen Sie die **Einstellungen** (Windows + I)
-2. Navigieren Sie zu **Update & Sicherheit** > **Für Entwickler**
-3. Aktivieren Sie den **Entwicklermodus**
-
----
-
-### 2. Windows App Runtime installieren
+### 1. Windows App Runtime installieren
 
 Damit unsere WinUI 3-Anwendung korrekt funktioniert, muss die Windows App Runtime installiert sein.
 
@@ -98,7 +52,7 @@ Das MSIX-Paket **Microsoft.WindowsAppRuntime.1.8.msix** ist ausreichend, da dort
 
 ---
 
-### 3. Fluent Icons Font installieren
+### 2. Fluent Icons Font installieren
 
 Unsere Anwendung nutzt die Fluent UI Icons – das ist das offizielle Symbol-Designsystem von Microsoft für moderne Windows-Apps.
 
@@ -114,7 +68,7 @@ Da Windows Server 2019 auf dem älteren Windows 10 1809-Kernel basiert, fehlt di
 
 ---
 
-### 4. .NET 9 Runtime installieren
+### 3. .NET 9 Runtime installieren
 
 Unsere Anwendung basiert auf .NET 9. Damit sie ausgeführt werden kann, müssen die passenden Microsoft-Laufzeitumgebungen (ASP.NET Core und Windows Desktop Runtime) installiert werden.
 
@@ -136,37 +90,75 @@ Diese stellen sicher, dass die Anwendung sowohl ihre Oberfläche (WinUI 3) als a
 
 ## Installation
 
-### Option A – Direkte Installation
+Das Client-Paket wird als ZIP-Archiv (`revioClient.zip`) ausgeliefert und enthält alle für die Installation benötigten Artefakte:
 
-1. Kopieren Sie die MSIX-Datei auf den Server, z. B.:
+- `revioClient_<Version>_x64.msix` – das signierte Anwendungspaket
+- `Dependencies\` – Windows App Runtime in allen Architekturen (x64, x86, arm64, win32)
+- `UpdateRevioMsix.ps1` – PowerShell-Installer für Erstinstallation und Updates
+- `Install.ps1` / `Add-AppDevPackage.ps1` – Microsoft-Standardskripte (für Sonderfälle)
+
+### Option A – Manuelle Installation auf einem Einzelsystem
+
+1. `revioClient.zip` auf den Zielserver kopieren und entpacken, z. B. nach:
    ```
-   C:\Deploy\UnsereApp.msix
+   C:\Deploy\revioClient\
    ```
 
-2. **Installation per Rechtsklick:**
-   - Rechtsklick auf die Datei → **Installieren**
-
-3. **Installation per PowerShell:**
+2. PowerShell als Administrator öffnen und das Installationsskript ausführen:
    ```powershell
-   Add-AppxPackage -Path "C:\Deploy\UnsereApp.msix"
-   ```   
+   C:\Deploy\revioClient\UpdateRevioMsix.ps1
+   ```
+
+#### Was das Skript `UpdateRevioMsix.ps1` macht
+
+Das Skript ist ein schlanker Wrapper um `Add-AppxPackage` und übernimmt die folgenden Schritte:
+
+1. Es ermittelt aus dem eigenen Pfad den Speicherort des MSIX-Pakets sowie der Windows App Runtime (`Dependencies\x64\Microsoft.WindowsAppRuntime.1.8.msix`).
+2. Es prüft, ob beide Dateien vorhanden sind, und bricht andernfalls mit einer aussagekräftigen Fehlermeldung ab.
+3. Es installiert die Anwendung mit den Flags `-ForceApplicationShutdown` (laufende Instanzen werden beendet) und `-ForceUpdateFromAnyVersion` (Upgrade aus jeder bisher installierten Version, auch Downgrades, sofern Signatur und Paketname identisch sind).
+
+Damit deckt dasselbe Skript sowohl die **Erstinstallation** als auch alle **Folge-Updates** ab. Die Zielversion kann optional per Parameter überschrieben werden:
+
+```powershell
+.\UpdateRevioMsix.ps1 -Version 4.0.357.0
+```
 
 ---
 
-### Option B – Zentrale Verteilung per PowerShell-Skript
+### Option B – Zentrale Verteilung über ein Logon-Skript (empfohlen für RDS / Mehrbenutzer)
 
-Für Mehrbenutzer- oder RDS-Umgebungen kann die Installation automatisiert werden:
+Da MSIX pro Benutzerprofil registriert wird, eignet sich die Kombination aus zentral abgelegtem Installationsskript und einem benutzerbezogenen Logon-Skript besonders gut für Terminalserver- und Mehrbenutzerumgebungen.
+
+#### Konzept
+
+1. Der Inhalt von `revioClient.zip` wird einmalig in eine zentrale, für alle relevanten Benutzer lesbare Freigabe entpackt – entweder lokal auf dem Terminalserver (z. B. `C:\Deploy\revioClient\`, freigegeben als `\\<SERVER>\Deploy\revioClient`) oder auf einem Fileserver.
+2. Ein Logon-Skript (per GPO als **User Logon Script** verteilt) ruft bei jeder Anmeldung `UpdateRevioMsix.ps1` aus dieser Freigabe auf. `Add-AppxPackage` mit `-ForceUpdateFromAnyVersion` ist idempotent: ist die aktuelle Version bereits registriert, kehrt der Aufruf praktisch ohne Last zurück; ist eine neue Version vorhanden, wird automatisch aktualisiert.
+3. Für ein Rollout einer neuen Client-Version muss lediglich der Inhalt der zentralen Freigabe durch das neue, entpackte `revioClient.zip` ersetzt werden. Alle Benutzer erhalten das Update bei ihrer nächsten Anmeldung – ohne weiteren administrativen Eingriff pro Benutzer oder Maschine.
+
+#### Beispiel-Logon-Skript
 
 ```powershell
-# Beispielskript für zentrale Installation pro Benutzer
-$PackagePath = "\\Server\Share\UnsereApp.msix"
-Add-AppxPackage -Path $PackagePath
+# revioClient-Logon.ps1 – als User Logon Script per GPO verteilen
+$Installer = "\\<SERVER>\Deploy\revioClient\UpdateRevioMsix.ps1"
+
+if (Test-Path $Installer) {
+    & $Installer
+}
 ```
 
-Das Skript kann ausgeführt werden:
-- als Login-Skript (GPO User Script)
-- über System Center Configuration Manager (SCCM)
-- oder per Intune PowerShell Deployment
+#### Hinweise zur Berechtigung
+
+- Die Freigabe muss für die anmeldenden Benutzer mindestens **Lesezugriff** auf alle Dateien (inkl. `Dependencies\`) erlauben.
+- `Add-AppxPackage` registriert das Paket im Benutzerkontext und benötigt keine erhöhten Rechte – das Logon-Skript läuft also ohne UAC-Prompt.
+- Die Schreibrechte auf die Freigabe bleiben den Administratoren vorbehalten, die das Update-Paket austauschen.
+
+#### Alternative Verteilungswege
+
+Dasselbe Skript lässt sich identisch über andere Verteilungsmechanismen ausführen, falls keine GPO-Logon-Skripte eingesetzt werden:
+
+- **Microsoft Intune** – PowerShell Script Assignment im Benutzerkontext
+- **System Center Configuration Manager (SCCM/MECM)** – Package/Program oder Application im User-Context
+- **Aufgabenplanung** – Trigger „Bei Anmeldung jedes Benutzers"
 
 ---
 
@@ -174,19 +166,10 @@ Das Skript kann ausgeführt werden:
 
 Falls eine moderne Verwaltung eingesetzt wird:
 
-1. Öffnen Sie das **Intune Portal**
-2. Navigieren Sie zu **Apps** > **Add App** > **Line-of-business App**
-3. Laden Sie die MSIX-Datei hoch
-4. Weisen Sie Zielgruppen (Benutzer / Geräte) zu
-5. Intune verteilt und verwaltet das Paket automatisch
-
----
-
-### Option D – Terminalserver-Umgebung (RDS)
-
-MSIX wird benutzergebunden installiert.
-
-**Empfehlung:** Installation über Login-Skript, sodass die App bei der ersten Anmeldung jedes Benutzers automatisch eingerichtet wird.
+1. `revioClient.zip` entpacken und die enthaltene MSIX-Datei (`revioClient_<Version>_x64.msix`) sowie die Runtime-Abhängigkeit aus `Dependencies\x64\` bereithalten.
+2. Im **Intune Portal** unter **Apps** > **Add App** > **Line-of-business App** das MSIX-Paket hochladen.
+3. Zielgruppen (Benutzer oder Geräte) zuweisen.
+4. Intune verteilt und verwaltet das Paket automatisch.
 
 ---
 
@@ -237,13 +220,9 @@ Nach dem Import steht das Zertifikat systemweit als vertrauenswürdig zur Verfü
 
 ### 2. Konfigurationsdatei für Serververbindungen
 
-Damit sich die Anwendung korrekt mit dem gewünschten Server verbinden kann, muss die Datei `ServerList.json` im Benutzerprofil abgelegt werden.
-
-Diese Datei enthält die Liste der verfügbaren Serverinstanzen und die jeweilige Standardverbindung.
+Damit sich die Anwendung korrekt mit dem gewünschten Server verbinden kann, muss die Datei `ServerList.json` im Benutzerprofil jedes Benutzers abgelegt werden. Sie enthält die Liste der verfügbaren Serverinstanzen und die jeweilige Standardverbindung.
 
 #### Speicherort
-
-Die Datei muss sich im folgenden Pfad befinden:
 
 ```
 %USERPROFILE%\revio\ServerList.json
@@ -251,7 +230,21 @@ Die Datei muss sich im folgenden Pfad befinden:
 
 Beim Start liest die Anwendung diese Datei automatisch aus, um die Serververbindung und Benutzerdaten zu initialisieren.
 
-#### Beispielinhalt
+#### Datei aus `revioClientConfig.zip` aufbereiten
+
+Bei der revio4 Backendinstallation wird das ZIP-File `revioClientConfig.zip` erzeugt (siehe revio4 Installationshandbuch). Darin liegt eine Datei `serverConfig.json` mit einem einzelnen Serverobjekt, z. B.:
+
+```json
+{"Title":"revio AG","Url":"https://revioServer:27011","IsDefault":true}
+```
+
+Die Anwendung erwartet jedoch eine Datei mit dem Namen **`ServerList.json`**, deren Inhalt ein **Array** von Servereinträgen ist und die zusätzlich die Felder `Type` und `LastLoginUser` enthält. Die Datei aus dem ZIP muss daher vor der Verteilung manuell angepasst werden:
+
+1. `serverConfig.json` aus `revioClientConfig.zip` extrahieren.
+2. Inhalt in ein Array umschliessen und die fehlenden Felder ergänzen.
+3. Datei in `ServerList.json` umbenennen.
+
+#### Ziel-Inhalt der `ServerList.json`
 
 ```json
 [
@@ -275,37 +268,19 @@ Beim Start liest die Anwendung diese Datei automatisch aus, um die Serververbind
 | `IsDefault` | Gibt an, welcher Server beim Start automatisch ausgewählt wird |
 | `LastLoginUser` | Benutzername oder E-Mail des zuletzt angemeldeten Benutzers |
 
-#### Kopieren der Datei
+#### Verteilung an die Benutzerprofile
 
-1. Erstellen Sie den Ordner, falls nicht vorhanden:
+1. Zielordner anlegen, falls nicht vorhanden:
    ```powershell
    New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\revio"
    ```
 
-2. Kopieren Sie die Datei:
+2. Aufbereitete Datei kopieren:
    ```powershell
    Copy-Item "C:\Deploy\ServerList.json" "$env:USERPROFILE\revio\ServerList.json" -Force
    ```
 
-> **Wichtig:** Jeder Benutzer, der die Anwendung verwendet, benötigt eine eigene Kopie dieser Datei in seinem Profilordner.
-
----
-
-## Updates
-
-Neue Versionen können mit derselben Methode verteilt werden.
-
-MSIX erkennt automatisch bestehende Installationen und führt eine saubere, inkrementelle Aktualisierung durch.
-
-**Kein Deinstallieren erforderlich.**
-
-### Update per PowerShell
-
-```powershell
-Add-AppxPackage -Path "C:\Deploy\UnsereApp_v2.msix" -ForceUpdateFromAnyVersion
-```
-
-Das System aktualisiert die Anwendung automatisch auf die neue Version, ohne dass Benutzerdaten oder Konfigurationen verloren gehen.
+> **Wichtig:** Jeder Benutzer, der die Anwendung verwendet, benötigt eine eigene Kopie dieser Datei in seinem Profilordner. In RDS-/Mehrbenutzerumgebungen empfiehlt sich die Kombination mit dem in Option B beschriebenen Logon-Skript.
 
 ---
 
@@ -313,5 +288,5 @@ Das System aktualisiert die Anwendung automatisch auf die neue Version, ohne das
 
 Bei Fragen oder Problemen wenden Sie sich bitte an den technischen Support.
 
-**Version:** 1.0  
-**Letzte Aktualisierung:** November 2025
+**Version:** 1.1  
+**Letzte Aktualisierung:** Mai 2026
