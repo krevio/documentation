@@ -203,7 +203,7 @@ cd C:\revio4Backend
 
 **2. Installationsskript herunterladen und ausführen:**
 ```powershell
-iwr https://reviofiles.blob.core.windows.net/revio4-installation-files/4.0.270.0/InstallRevioBackend.ps1 -OutFile InstallRevioBackend.ps1
+iwr https://reviofiles.blob.core.windows.net/revio4-installation-files/latest/InstallRevioBackend.ps1 -OutFile InstallRevioBackend.ps1
 
 .\InstallRevioBackend.ps1
 ```
