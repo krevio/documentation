@@ -69,6 +69,28 @@ schliesst das Fenster mit **„Schliessen"**.
 protokolliert (mit Live-Anzeige im Wizard). Passwörter, Lizenzschlüssel und Zugangsdaten
 werden dabei maskiert und nie im Klartext gespeichert.
 
+### 3.1 Vorabversion installieren (`/preRelease`)
+
+Standardmässig lädt das Setup Backend und Client aus dem Kanal **`latest`** (die freigegebene
+Version). Mit dem optionalen Schalter `/preRelease` werden stattdessen die **Vorabversionen**
+dieser beiden Pakete geladen:
+
+```powershell
+RevioSetup.exe /preRelease
+```
+
+- Betrifft ausschliesslich das **Backend-Server-Paket** (`revioServer_x64.zip`) und das
+  **Client-Paket** (`revioClient.zip`). Datenbank-Engine, .NET-Laufzeiten und Schriftart
+  bleiben unverändert.
+- Statt `/preRelease` ist auch `--prerelease` zulässig (Gross-/Kleinschreibung egal).
+- Der Assistent verhält sich ansonsten **exakt gleich** wie ohne den Schalter. Auf der
+  Zusammenfassungsseite sind die verwendeten Download-Adressen ersichtlich (mit `/preRelease/`
+  im Pfad), ebenso im Protokoll.
+- Der Schalter wirkt **pro Aufruf** – für eine reguläre Installation einfach ohne ihn starten.
+
+> **Hinweis:** Vorabversionen sind für Test- und Abnahmezwecke gedacht und sollten nicht
+> ungeprüft in Produktivumgebungen eingespielt werden.
+
 ---
 
 ## 4. Backend installieren (Server)
@@ -300,6 +322,59 @@ installiert"**:
 %ProgramData%\revio\Setup\logs\setup_*.log       # Ablauf des jeweiligen Setup-Laufs
 %ProgramData%\revio\Setup\logs\launcher.log      # Start-/Watchdog-Protokoll
 ```
+
+---
+
+## 10. Offline-Installation (Paket vorab erstellen)
+
+Für Zielserver ohne direkten Zugang zu `reviofiles.blob.core.windows.net` lässt sich das
+Setup **offline** betreiben: Sämtliche Installationspakete werden vorab auf einem Rechner
+mit Internetzugang in **ein einziges Artefakt-Paket** (`revioSetupArtifacts.zip`) gebündelt
+und auf dem Zielserver von dort statt aus dem Internet installiert.
+
+> **Wichtig:** Offline bezieht sich nur auf die *Installationspakete*. Die **Lizenzprüfung**
+> und der Paketabruf laufen weiterhin über `https://intern.revioservices.ch` – hierfür
+> bleibt auf dem Zielserver ein Internetzugriff erforderlich.
+
+### 10.1 Artefakt-Paket erstellen
+
+Auf einem Rechner **mit Internetzugang** `RevioSetup.exe` einmalig im Konsolenmodus
+`/SingleArtifact` aufrufen:
+
+```powershell
+RevioSetup.exe /SingleArtifact [Ausgabeverzeichnis]
+```
+
+- Ohne Angabe wird das Paket im **aktuellen Verzeichnis** abgelegt; ein optionales erstes
+  Argument gibt das Ausgabeverzeichnis vor.
+- Statt `/SingleArtifact` sind auch `--singleartifact` zulässig (Gross-/Kleinschreibung egal).
+- Der Aufruf läuft **ohne Oberfläche** in der Konsole, zeigt den Fortschritt an und liefert
+  einen Exit-Code zurück (`0` = Erfolg, `1` = Fehler).
+
+Der Befehl lädt alle Artefakte (Backend-, Datenbank- und Client-ZIP, die drei Laufzeiten
+und den Segoe-Fluent-Font) herunter und schreibt sie zusammen mit einer
+`manifest.json` (Grösse und SHA-256 je Datei) in die Datei **`revioSetupArtifacts.zip`**.
+
+Der Schalter `/preRelease` (siehe [Abschnitt 3.1](#31-vorabversion-installieren-prerelease))
+lässt sich kombinieren – dann enthält das Paket die **Vorabversionen** von Backend und Client:
+
+```powershell
+RevioSetup.exe /SingleArtifact /preRelease [Ausgabeverzeichnis]
+```
+
+> **Wichtig:** Wird ein solches Vorabversions-Paket verwendet, muss die anschliessende
+> Offline-Installation auf dem Zielserver **ebenfalls mit `/preRelease`** gestartet werden
+> (`RevioSetup.exe /preRelease`). Andernfalls werden die Artefakte im Paket nicht gefunden.
+
+### 10.2 Auf dem Zielserver installieren
+
+1. `RevioSetup.exe` **und** `revioSetupArtifacts.zip` auf den Zielserver kopieren.
+2. Setup als Administrator starten.
+3. Auf der Startseite **„Offline-Installation"** anhaken und über **„Durchsuchen…"** das
+   `revioSetupArtifacts.zip` auswählen.
+4. Den Assistenten wie gewohnt durchlaufen. Beim Weiterschalten wird das Paket geprüft
+   (Grösse und Prüfsumme je Datei); anschliessend werden alle Artefakte aus dem Paket statt
+   aus dem Internet installiert.
 
 ---
 
