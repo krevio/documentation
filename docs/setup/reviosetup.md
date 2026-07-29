@@ -54,6 +54,14 @@ lediglich als Hinweis angezeigt.
 
 ## 3. Setup starten
 
+**Download:** [`RevioSetup.exe`](https://reviofiles.blob.core.windows.net/revio4-installation-files/setup/RevioSetup.exe)
+
+Alternativ per PowerShell:
+
+```powershell
+iwr https://reviofiles.blob.core.windows.net/revio4-installation-files/setup/RevioSetup.exe -OutFile RevioSetup.exe
+```
+
 1. `RevioSetup.exe` auf den Zielserver kopieren (nur diese eine Datei nötig).
 2. Per Rechtsklick **„Als Administrator ausführen"** starten (bzw. UAC bestätigen).
 3. Beim ersten Start entpackt .NET einmalig einige Komponenten nach `%TEMP%` – das kann

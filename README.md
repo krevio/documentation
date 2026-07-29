@@ -11,7 +11,7 @@ Zielgruppe
 Diese Dokumentation richtet sich an Systemadministrator:innen, DevOps‑Teams, Support‑Mitarbeiter:innen sowie technische Ansprechpartner:innen bei Kund:innen.
 
 Schnellstart
-1. **Empfohlen:** Nutzen Sie den Setup-Assistenten `RevioSetup.exe` – siehe [Installation und Wartung mit dem Setup-Assistenten](docs/setup/reviosetup.md). Er führt Sie durch Backend-, Client- und Terminal-Server-/RDS-Installation.
+1. **Empfohlen:** Nutzen Sie den Setup-Assistenten [`RevioSetup.exe`](https://reviofiles.blob.core.windows.net/revio4-installation-files/setup/RevioSetup.exe) – siehe [Installation und Wartung mit dem Setup-Assistenten](docs/setup/reviosetup.md). Er führt Sie durch Backend-, Client- und Terminal-Server-/RDS-Installation.
 2. Folgen Sie der Grundkonfiguration.
 
 Dokumentation im Überblick
