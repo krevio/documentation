@@ -46,11 +46,13 @@ Installieren Sie die **WindowsAppRuntimeInstall-x64.exe**, da hier die Paket- un
 
 **Download:**
 - [Windows App SDK Downloads](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads)
-- [Direkter Download (v1.8)](https://aka.ms/windowsappsdk/1.8/latest/windowsappruntimeinstall-x64.exe)
+- [Direkter Download (v2.4.0)](https://aka.ms/windowsappsdk/2.4/2.4.0/windowsappruntimeinstall-x64.exe)
 
 #### Für Windows Server 2022 und neuer
 
-Das MSIX-Paket **Microsoft.WindowsAppRuntime.1.8.msix** ist ausreichend, da dort die Voraussetzungen bereits gegeben sind. Diese Runtime-Version wird mit unserem Client-Setup mitgeliefert (Dependencies-Folder).
+Das MSIX-Paket **Microsoft.WindowsAppRuntime.2.msix** ist ausreichend, da dort die Voraussetzungen bereits gegeben sind. Diese Runtime-Version wird mit unserem Client-Setup mitgeliefert (Dependencies-Folder).
+
+> **Hinweis zum Paketnamen:** Ab Version 2.0 lässt Microsoft die Minor-Version im Paketnamen weg – die 2.4.0-Laufzeit heisst `Microsoft.WindowsAppRuntime.2`, nicht `…2.4`. Der Client fordert sie im Manifest mit `MinVersion 2.4.0.0` an.
 
 ---
 
@@ -70,9 +72,9 @@ Da Windows Server 2019 auf dem älteren Windows 10 1809-Kernel basiert, fehlt di
 
 ---
 
-### 3. .NET 9 Runtime installieren
+### 3. .NET 10 Runtime installieren
 
-Unsere Anwendung basiert auf .NET 9. Damit sie ausgeführt werden kann, müssen die passenden Microsoft-Laufzeitumgebungen (ASP.NET Core und Windows Desktop Runtime) installiert werden.
+Unsere Anwendung basiert auf .NET 10. Damit sie ausgeführt werden kann, müssen die passenden Microsoft-Laufzeitumgebungen (ASP.NET Core und Windows Desktop Runtime) installiert werden.
 
 Diese stellen sicher, dass die Anwendung sowohl ihre Oberfläche (WinUI 3) als auch interne Web-Komponenten korrekt ausführen kann.
 
@@ -80,13 +82,13 @@ Diese stellen sicher, dass die Anwendung sowohl ihre Oberfläche (WinUI 3) als a
 
 #### Benötigte Komponenten
 
-1. **ASP.NET Core Runtime 9.0.9**
-   - [Direkter Download](https://builds.dotnet.microsoft.com/dotnet/aspnetcore/Runtime/9.0.9/aspnetcore-runtime-9.0.9-win-x64.exe)
+1. **ASP.NET Core Runtime 10.0.11**
+   - [Direkter Download](https://builds.dotnet.microsoft.com/dotnet/aspnetcore/Runtime/10.0.11/aspnetcore-runtime-10.0.11-win-x64.exe)
 
-2. **Windows Desktop Runtime 9.0.9**
-   - [Direkter Download](https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/9.0.9/windowsdesktop-runtime-9.0.9-win-x64.exe)
+2. **Windows Desktop Runtime 10.0.11**
+   - [Direkter Download](https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/10.0.11/windowsdesktop-runtime-10.0.11-win-x64.exe)
 
-**Weitere Informationen:** [.NET 9 Downloads](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+**Weitere Informationen:** [.NET 10 Downloads](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 
 ---
 
@@ -115,15 +117,26 @@ Das Client-Paket wird als ZIP-Archiv (`revioClient.zip`) ausgeliefert und enthä
 
 Das Skript ist ein schlanker Wrapper um `Add-AppxPackage` und übernimmt die folgenden Schritte:
 
-1. Es ermittelt aus dem eigenen Pfad den Speicherort des MSIX-Pakets sowie der Windows App Runtime (`Dependencies\x64\Microsoft.WindowsAppRuntime.1.8.msix`).
+1. Es ermittelt aus dem eigenen Pfad den Speicherort des MSIX-Pakets sowie der Windows App Runtime (`Dependencies\x64\Microsoft.WindowsAppRuntime.2.msix`).
 2. Es prüft, ob beide Dateien vorhanden sind, und bricht andernfalls mit einer aussagekräftigen Fehlermeldung ab.
 3. Es installiert die Anwendung mit den Flags `-ForceApplicationShutdown` (laufende Instanzen werden beendet) und `-ForceUpdateFromAnyVersion` (Upgrade aus jeder bisher installierten Version, auch Downgrades, sofern Signatur und Paketname identisch sind).
 
 Damit deckt dasselbe Skript sowohl die **Erstinstallation** als auch alle **Folge-Updates** ab. Die Zielversion kann optional per Parameter überschrieben werden:
 
 ```powershell
-.\UpdateRevioMsix.ps1 -Version 4.0.357.0
+.\UpdateRevioMsix.ps1 -Version 4.0.366.0
 ```
+
+> **Hinweis:** Ältere Kopien des Skripts verweisen noch auf `Microsoft.WindowsAppRuntime.1.8.msix`.
+> Da das Paket seit dem Wechsel auf Windows App SDK 2.4.0 nur noch
+> `Microsoft.WindowsAppRuntime.2.msix` enthält, bricht ein solches Skript mit
+> `Dependency not found` ab. In diesem Fall direkt installieren:
+>
+> ```powershell
+> Add-AppxPackage -Path .\revioClient_4.0.366.0_x64.msix `
+>   -DependencyPath .\Dependencies\x64\Microsoft.WindowsAppRuntime.2.msix `
+>   -ForceApplicationShutdown -ForceUpdateFromAnyVersion
+> ```
 
 ---
 
@@ -290,5 +303,5 @@ Die Anwendung erwartet jedoch eine Datei mit dem Namen **`ServerList.json`**, de
 
 Bei Fragen oder Problemen wenden Sie sich bitte an den technischen Support.
 
-**Version:** 1.1  
-**Letzte Aktualisierung:** Mai 2026
+**Version:** 1.2  
+**Letzte Aktualisierung:** September 2026

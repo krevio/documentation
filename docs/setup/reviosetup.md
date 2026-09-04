@@ -46,9 +46,10 @@ Auf der Startseite (**„Was möchten Sie installieren?"**) stehen drei Modi zur
 | **Freie Ports (Backend)** | Standard **HTTP 27010**, **HTTPS 27011**, **MongoDB 27040**. Belegte Ports blockieren die Installation. |
 | **Für RDS zusätzlich** | RD-Sitzungshost-Rolle und – bei GPO-Verteilung – Domänenmitgliedschaft (siehe eigene Anleitung, Abschnitt 6). |
 
-Fehlende Client-Laufzeiten (ASP.NET Core 9, Windows Desktop Runtime 9, Windows App
-Runtime 1.8, Segoe-Fluent-Icons) werden vom Setup **automatisch nachinstalliert** und
-lediglich als Hinweis angezeigt.
+Fehlende Client-Laufzeiten (ASP.NET Core 10.0.11, Windows Desktop Runtime 10.0.11,
+Windows App Runtime 2.4.0, Segoe-Fluent-Icons) werden vom Setup **automatisch
+nachinstalliert** und lediglich als Hinweis angezeigt. Dieselben Versionen gelten für den
+Standard- und den Vorabkanal (`/preRelease`).
 
 ---
 

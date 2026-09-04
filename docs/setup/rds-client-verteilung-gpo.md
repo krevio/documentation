@@ -140,7 +140,7 @@ Auf Server 2019/2016 lässt sich die **Windows App SDK-Laufzeit** nicht zuverlä
 MSIX-Abhängigkeit pro Benutzer registrieren. Das Anmeldeskript erkennt diese Server automatisch
 und installiert die Laufzeit stattdessen im **Benutzerkontext** über
 `windowsappruntimeinstall-x64.exe` (aus der zentralen Ablage; ersatzweise Download von
-`https://aka.ms/windowsappsdk/1.8/latest/windowsappruntimeinstall-x64.exe`). Es ist dafür kein
+`https://aka.ms/windowsappsdk/2.4/2.4.0/windowsappruntimeinstall-x64.exe`). Es ist dafür kein
 manueller Eingriff nötig.
 
 Das maschinenweite MSIX-Provisioning schlägt auf Server 2019 häufig fehl – das ist **unkritisch**
@@ -233,7 +233,7 @@ Mit `Add-AppxProvisionedPackage` wird das Paket **einmalig maschinenweit bereitg
 # Einmalig, als Administrator auf dem Sitzungshost (Server 2022+):
 Add-AppxProvisionedPackage -Online `
   -PackagePath        "C:\Deploy\revioClient\revioClient_<Version>_x64.msix" `
-  -DependencyPackagePath "C:\Deploy\revioClient\Dependencies\x64\Microsoft.WindowsAppRuntime.1.8.msix" `
+  -DependencyPackagePath "C:\Deploy\revioClient\Dependencies\x64\Microsoft.WindowsAppRuntime.2.msix" `
   -SkipLicense
 
 # Prüfen:
