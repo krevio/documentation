@@ -71,7 +71,7 @@ Alle **archivierten PDF-Akten** werden ins revio 4 Archiv übertragen.
 | Parameter | Beschreibung | Standardwert |
 |-----------|--------------|--------------|
 | `--db` | MongoDB Connection String | `mongodb://localhost:27024` |
-| `--year` | Revisionsjahr für die Extraktion | `2026` |
+| `--year` | Revisionsjahr für die Extraktion | `2025` |
 | `--parallelism` | Maximale Anzahl paralleler Tasks | Anzahl CPU-Kerne |
 | `--apiurl` | URL des revio REST-API Services | `http://localhost:27029` |
 | `--output` | Ausgabeverzeichnis für die ZIP-Datei | `.` (aktuelles Verzeichnis) |
