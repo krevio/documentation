@@ -23,7 +23,7 @@ Dokumentation im Überblick
 - **Backend**
   - [Öffentliches Server-Deployment (internetseitig)](docs/backend/revio-public-server-deployment.md)
 - **Client (Einzelarbeitsplatz / manuelle Installation)**
-  - Download: [`revioClient.zip`](https://reviofiles.blob.core.windows.net/revio4-installation-files/latest/revioClient.zip)
+  - Download: [`revioClient.zip`](https://reviofiles.blob.core.windows.net/revio4-installation-files/latest/revioClient.zip) (immer die aktuellste offizielle Version; ältere Versionen ab 4.0.380 im [Archiv](docs/client/clientInstall-WinServer.md#download))
   - [revio 4 Client auf Windows Server 2019+](docs/client/clientInstall-WinServer.md)
 - **Migration**
   - [revio Migrator](docs/migration/revio-migrator.md)
