@@ -1,6 +1,6 @@
 # Installation und Konfiguration - revio 4 Client auf Windows Server 2019+
 
-> **Hinweis:** Für Neuinstallationen empfehlen wir den **Setup-Assistenten** (`RevioSetup.exe`) – siehe [revio 4 Setup](../setup/reviosetup.md) und, für die Verteilung auf Terminal-Servern, [RDS-Verteilung per GPO](../setup/rds-client-verteilung-gpo.md). Der Assistent übernimmt Voraussetzungen, Zertifikatsimport, MSIX-Installation und `ServerList.json` automatisch. Diese Anleitung beschreibt die **manuelle Installation** für Sonderfälle und zum Verständnis der einzelnen Schritte.
+> **Hinweis:** Für die Installation auf **Terminal-Servern (RDS)** empfehlen wir den **Setup-Assistenten** (`RevioSetup.exe`) – siehe [revio 4 Setup](../setup/reviosetup.md) und [RDS-Verteilung per GPO](../setup/rds-client-verteilung-gpo.md). Der Assistent übernimmt dort Voraussetzungen, Zertifikatsimport, MSIX-Installation und `ServerList.json` automatisch. Für **einzelne Arbeitsplätze** wird der Client direkt aus [`revioClient.zip`](https://reviofiles.blob.core.windows.net/revio4-installation-files/latest/revioClient.zip) installiert (siehe [Option A](#option-a--manuelle-installation-auf-einem-einzelsystem)). Diese Anleitung beschreibt die **manuelle Installation** und die einzelnen Schritte im Detail.
 
 ## Inhaltsverzeichnis
 

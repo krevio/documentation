@@ -17,12 +17,12 @@ Schnellstart
 3. Folgen Sie der Grundkonfiguration.
 
 Dokumentation im Überblick
-- **Setup-Assistent (empfohlen)**
+- **Setup-Assistent (Backend & Terminal-Server/RDS)**
   - [revio 4 Setup – Installation und Wartung](docs/setup/reviosetup.md)
   - [RDS-Client-Verteilung per GPO](docs/setup/rds-client-verteilung-gpo.md)
 - **Backend**
   - [Öffentliches Server-Deployment (internetseitig)](docs/backend/revio-public-server-deployment.md)
-- **Client (manuelle Installation)**
+- **Client (Einzelarbeitsplatz / manuelle Installation)**
   - Download: [`revioClient.zip`](https://reviofiles.blob.core.windows.net/revio4-installation-files/latest/revioClient.zip)
   - [revio 4 Client auf Windows Server 2019+](docs/client/clientInstall-WinServer.md)
 - **Migration**
