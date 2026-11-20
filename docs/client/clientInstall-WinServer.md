@@ -113,7 +113,7 @@ Das Client-Paket wird als ZIP-Archiv (`revioClient.zip`) ausgeliefert und enthä
    C:\Deploy\revioClient\UpdateRevioMsix.ps1
    ```
 
-> **Hinweis – Windows-11-Arbeitsstation:** Auf einer normalen Windows-11-Arbeitsstation kann der Benutzer die `revioClient_<Version>_x64.msix` aus dem entpackten ZIP einfach per **Doppelklick** installieren – ohne Administratorrechte und ohne das Skript. Die Windows App Runtime wird dabei vom MSIX-Installer automatisch mitinstalliert. Die .NET 10 Runtime muss vorhanden sein; fehlt sie, verweist die App beim Start auf den Download.
+> **Hinweis – Windows-11-Arbeitsstation:** Auf einer normalen Windows-11-Arbeitsstation kann der Benutzer die `revioClient_<Version>_x64.msix` aus dem entpackten ZIP einfach per **Doppelklick** installieren – ohne Administratorrechte und ohne das Skript. Die Windows App Runtime wird dabei vom MSIX-Installer automatisch mitinstalliert. Die .NET 10 Runtime muss vorhanden sein; fehlt sie, verweist die App beim Start auf den Download. Bei einer Neuinstallation wird im Anmeldebildschirm die `revioClientConfig.zip` aus der Backend-Installation eingelesen (Server-Zertifikat und Serververbindung).
 
 #### Was das Skript `UpdateRevioMsix.ps1` macht
 
