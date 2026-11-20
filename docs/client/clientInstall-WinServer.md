@@ -104,12 +104,12 @@ Das Client-Paket wird als ZIP-Archiv (`revioClient.zip`) ausgeliefert und enthä
 ### Download
 
 - **Aktuelle Version:** [`revioClient.zip`](https://reviofiles.blob.core.windows.net/revio4-installation-files/latest/revioClient.zip) – dieser Link zeigt immer auf die aktuellste offizielle Version.
-- **Bestimmte Version (Archiv):** Ältere bzw. spezifische Versionen können aus dem Archiv heruntergeladen werden. Archivversionen gibt es **ab Release 4.0.380**. Der Link folgt dem Muster
+- **Bestimmte Version (Archiv):** Ältere bzw. spezifische Versionen können aus dem Archiv heruntergeladen werden. Archivversionen gibt es **ab Release 4.0.373**. Der Link folgt dem Muster
   ```
   https://reviofiles.blob.core.windows.net/revio4-installation-files/archive/{version}/revioClient.zip
   ```
-  wobei `{version}` die Build-Nummer ist, z. B. für 4.0.380:
-  [`archive/380/revioClient.zip`](https://reviofiles.blob.core.windows.net/revio4-installation-files/archive/380/revioClient.zip)
+  wobei `{version}` die Build-Nummer ist, z. B. für 4.0.373:
+  [`archive/373/revioClient.zip`](https://reviofiles.blob.core.windows.net/revio4-installation-files/archive/373/revioClient.zip)
 
 ### Option A – Manuelle Installation auf einem Einzelsystem
 
